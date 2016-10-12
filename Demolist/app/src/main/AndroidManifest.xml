@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="demo.lx.com.demolist">
-
+    <uses-sdk
+        android:minSdkVersion="23"
+        android:targetSdkVersion="23" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -23,7 +25,13 @@
         <activity
             android:name=".share.ShareMainActivity"
             android:label="分享"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".wxapi.WXEntryActivity"></activity>
+        <activity
+            android:name="demo.lx.com.demolist.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
