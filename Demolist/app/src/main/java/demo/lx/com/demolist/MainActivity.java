@@ -1,6 +1,8 @@
 package demo.lx.com.demolist;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -12,10 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+
+import demo.lx.com.demolist.share.ShareMainActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private Button btn_share;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +45,25 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        initView();
+        initListener();
     }
+
+    private void initListener() {
+        btn_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ShareMainActivity.class);
+                MainActivity.this.startActivity(intent);
+            }
+        });
+    }
+
+    private void initView() {
+        btn_share = (Button) findViewById(R.id.btn_share);
+    }
+    
+
 
     @Override
     public void onBackPressed() {
@@ -89,7 +112,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
-
+            Intent intent = new Intent(MainActivity.this, ShareMainActivity.class);
+            MainActivity.this.startActivity(intent);
         } else if (id == R.id.nav_send) {
 
         }
