@@ -29,7 +29,7 @@ public class WeiXinshare {
     public WeiXinshare(Context var0){
         context = var0;
         api = WXAPIFactory.createWXAPI(context,"wx9a61015dadc233b5");
-        api.registerApp("wx9a61015dadc233b5");
+//        api.registerApp("wx9a61015dadc233b5");
         initWx();
     }
 
@@ -37,16 +37,26 @@ public class WeiXinshare {
         if (!api.isWXAppInstalled()) {
             Toast.makeText(context, "您还未安装微信客户端", Toast.LENGTH_SHORT).show();
         } else {
-            WXWebpageObject webpage = new WXWebpageObject();
-            webpage.webpageUrl = "http://baidu.com";
+//            WXWebpageObject webpage = new WXWebpageObject();
+//            webpage.webpageUrl = "http://baidu.com";
+//
+//            WXMediaMessage msg = new WXMediaMessage();
+//            msg.description = "我的分享内容";
+//            msg.title = "测试分享";
+//
+//            Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
+//            msg.thumbData = Utils.bmpToByteArray(thumb, true);
+//
 
+            WXTextObject textObj = new WXTextObject();
+            textObj.text = "asdasdasd";
+
+            //   WXTextObject     ʼ  һ  WXMediaMessage
             WXMediaMessage msg = new WXMediaMessage();
-            msg.description = "我的分享内容";
-            msg.title = "测试分享";
-
-            Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
-            msg.thumbData = Utils.bmpToByteArray(thumb, true);
-
+            msg.mediaObject = textObj;
+            //      ı    ͵   Ϣʱ  title ֶβ
+            // msg.title = "Will be ignored";
+            msg.description = "asdasdasdsadasdwq321321321321";
             SendMessageToWX.Req req = new SendMessageToWX.Req();
             req.transaction = String.valueOf(System.currentTimeMillis());
             req.message = msg;
