@@ -17,8 +17,7 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
     private IWXAPI api;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        api = WXAPIFactory.createWXAPI(this, "这里替换第一步申请的APP_ID", false);
+        api = WXAPIFactory.createWXAPI(this, "wx9a61015dadc233b5", false);
         api.handleIntent(getIntent(), this);
         super.onCreate(savedInstanceState);
     }
