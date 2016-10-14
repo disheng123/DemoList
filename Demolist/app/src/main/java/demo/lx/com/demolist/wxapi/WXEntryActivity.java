@@ -1,6 +1,5 @@
 package demo.lx.com.demolist.wxapi;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -10,13 +9,16 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
-import java.util.logging.LogManager;
+import demo.lx.com.demolist.R;
 
 public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
+
+    // IWXAPI 是第三方app和微信通信的openapi接口
     private IWXAPI api;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        api = WXAPIFactory.createWXAPI(this, "wx9a61015dadc233b5", false);
+        super.onCreate(savedInstanceState);
+        api = WXAPIFactory.createWXAPI(this, "这里替换第一步申请的APP_ID", false);
         api.handleIntent(getIntent(), this);
         super.onCreate(savedInstanceState);
     }
@@ -28,8 +30,6 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
 
     @Override
     public void onResp(BaseResp resp) {
-//        LogManager.show("分享LOG", "resp.errCode:" + resp.errCode + ",resp.errStr:"
-//                + resp.errStr, 1);
         switch (resp.errCode) {
             case BaseResp.ErrCode.ERR_OK:
                 //分享成功

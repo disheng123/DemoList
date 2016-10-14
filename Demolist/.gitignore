@@ -6,3 +6,10 @@
 .DS_Store
 /build
 /captures
+/app/build/
+/.gradle/
+/.idea/
+/app/app.iml
+/app/app-release.apk
+/build/
+
