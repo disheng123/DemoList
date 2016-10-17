@@ -51,7 +51,7 @@ public class WeiXinshare {
             SendMessageToWX.Req req = new SendMessageToWX.Req();
             req.transaction = String.valueOf(System.currentTimeMillis());
             req.message = msg;
-            // 发送WXSceneSession聊天没见,WXSceneTimeline朋友圈界面
+            // WXSceneSession聊天界面,WXSceneTimeline朋友圈界面
             req.scene = SendMessageToWX.Req.WXSceneTimeline;
 
             api.sendReq(req);
