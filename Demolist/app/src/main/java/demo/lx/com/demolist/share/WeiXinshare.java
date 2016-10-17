@@ -15,8 +15,6 @@ import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
-import java.io.IOException;
-import java.net.URL;
 
 import demo.lx.com.demolist.R;
 import demo.lx.com.demolist.Utils;
