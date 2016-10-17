@@ -64,7 +64,7 @@ public class ShareUtil {
                 type = 1;
                 WeiXinshare weiXinshare = new WeiXinshare(context,type);
                 weiXinshare.setAppid("wx9a61015dadc233b5");
-                weiXinshare.initWx("标题","内容","http://www.chinagirlol.cc/data/attachment/forum/201412/03/233758hw7o7h08kkozkcwi.jpg","www.parteam.cn");
+                weiXinshare.initWx("标题","内容","http://lcd.yesky.com/imagelist/2009/315/qwm3qsg1r0l9.jpg","www.parteam.cn");
             }
         });
         //朋友圈
@@ -76,7 +76,7 @@ public class ShareUtil {
                 type = 2;
                 WeiXinshare weiXinshare = new WeiXinshare(context,type);
                 weiXinshare.setAppid("wx9a61015dadc233b5");
-                weiXinshare.initWx("标题pengyouquan","内容","http://www.chinagirlol.cc/data/attachment/forum/201412/03/233758hw7o7h08kkozkcwi.jpg","www.parteam.cn");
+                weiXinshare.initWx("标题pengyouquan","内容","http://lcd.yesky.com/imagelist/2009/315/qwm3qsg1r0l9.jpg","www.parteam.cn");
             }
         });
         //微博
