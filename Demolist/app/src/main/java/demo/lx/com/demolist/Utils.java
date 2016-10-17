@@ -6,10 +6,13 @@ import android.util.Log;
 
 import junit.framework.Assert;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -200,5 +203,39 @@ public class Utils {
         }
 
         return null;
+    }
+
+    /**
+     * 把网络资源图片转化成bitmap
+     * @param url  网络资源图片
+     * @return  Bitmap
+     */
+    public static Bitmap GetLocalOrNetBitmap(String url) {
+        Bitmap bitmap = null;
+        InputStream in = null;
+        BufferedOutputStream out = null;
+        try {
+            in = new BufferedInputStream(new URL(url).openStream(), 1024);
+            final ByteArrayOutputStream dataStream = new ByteArrayOutputStream();
+            out = new BufferedOutputStream(dataStream, 1024);
+            copy(in, out);
+            out.flush();
+            byte[] data = dataStream.toByteArray();
+            bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+            data = null;
+            return bitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static void copy(InputStream in, OutputStream out)
+            throws IOException {
+        byte[] b = new byte[1024];
+        int read;
+        while ((read = in.read(b)) != -1) {
+            out.write(b, 0, read);
+        }
     }
 }

@@ -40,45 +40,22 @@ public class WeiXinshare {
 
 
 
-    public void initWx(String title, String content, final String imageUrl, String shareUrl) {
+    public void initWx(String title, String content, String imageUrl, String shareUrl) {
         if (!api.isWXAppInstalled()) {
             Toast.makeText(context, "您还未安装微信客户端", Toast.LENGTH_SHORT).show();
         } else {
             WXWebpageObject web = new WXWebpageObject();
             web.webpageUrl= shareUrl;
 
-            final WXMediaMessage msg = new WXMediaMessage();
+            WXMediaMessage msg = new WXMediaMessage();
             msg.title = title;
             msg.description = content;
             msg.mediaObject = web;
 
             if(imageUrl != null || imageUrl.isEmpty()){
-                ImageLoader.getInstance().loadImage(imageUrl, new ImageLoadingListener() {
-                    @Override
-                    public void onLoadingStarted(String s, View view) {
-
-                    }
-
-                    @Override
-                    public void onLoadingFailed(String s, View view, FailReason failReason) {
-                        Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.mipmap.moren1);
-                        thumb.recycle();
-                        msg.thumbData = Utils.bmpToByteArray(thumb, true);
-                    }
-
-                    @Override
-                    public void onLoadingComplete(String s, View view, Bitmap bitmap) {
-                        Bitmap thumbBmp = Bitmap.createScaledBitmap(bitmap, THUMB_SIZE, THUMB_SIZE, true);
-                        bitmap.recycle();
-                        msg.thumbData = Utils.bmpToByteArray(thumbBmp, true);
-                    }
-
-                    @Override
-                    public void onLoadingCancelled(String s, View view) {
-
-                    }
-                });
-            }else{
+                Bitmap bitmap =Bitmap.createScaledBitmap(Utils.GetLocalOrNetBitmap(imageUrl),THUMB_SIZE,THUMB_SIZE,true);//压缩Bitmap
+                msg.thumbData = Utils.bmpToByteArray(bitmap, true);
+            } else{
                 Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.mipmap.moren1);
                 msg.thumbData = Utils.bmpToByteArray(thumb, true);
             }
