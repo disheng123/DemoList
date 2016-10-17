@@ -15,6 +15,8 @@ import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
+import java.io.IOException;
+import java.net.URL;
 
 import demo.lx.com.demolist.R;
 import demo.lx.com.demolist.Utils;
@@ -57,7 +59,7 @@ public class WeiXinshare {
             msg.description = content;
             msg.mediaObject = web;
 
-            if(imageUrl != null || !imageUrl.isEmpty()){
+            if(imageUrl != null || imageUrl.isEmpty()){
                 ImageLoader.getInstance().loadImage(imageUrl, new ImageLoadingListener() {
                     @Override
                     public void onLoadingStarted(String s, View view) {
