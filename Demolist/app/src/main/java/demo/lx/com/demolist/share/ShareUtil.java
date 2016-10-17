@@ -20,6 +20,7 @@ import demo.lx.com.demolist.R;
 public class ShareUtil {
     private int type;   //1：微信聊天，2：微信朋友圈
     private Context context;
+    private final String WXAPPID = "wx9a61015dadc233b5";
     public ShareUtil(Context context){
         this.context = context;
     }
@@ -62,8 +63,7 @@ public class ShareUtil {
                     dialog.dismiss();
                 }
                 type = 1;
-                WeiXinshare weiXinshare = new WeiXinshare(context,type);
-                weiXinshare.setAppid("wx9a61015dadc233b5");
+                WeiXinshare weiXinshare = new WeiXinshare(context,type,WXAPPID);
                 weiXinshare.initWx("标题","内容","http://lcd.yesky.com/imagelist/2009/315/qwm3qsg1r0l9.jpg","www.parteam.cn");
             }
         });
@@ -74,8 +74,7 @@ public class ShareUtil {
                     dialog.dismiss();
                 }
                 type = 2;
-                WeiXinshare weiXinshare = new WeiXinshare(context,type);
-                weiXinshare.setAppid("wx9a61015dadc233b5");
+                WeiXinshare weiXinshare = new WeiXinshare(context,type,WXAPPID);
                 weiXinshare.initWx("标题pengyouquan","内容","http://lcd.yesky.com/imagelist/2009/315/qwm3qsg1r0l9.jpg","www.parteam.cn");
             }
         });

@@ -29,22 +29,15 @@ public class WeiXinshare {
     private static final int THUMB_SIZE = 150;
     private IWXAPI api;
     private Context context;
-    private String appid;
     private int type;
 
-    public WeiXinshare(Context context,int type){
+    public WeiXinshare(Context context,int type,String appid){
         this.context = context;
         this.type = type;
-        initApi();
-    }
-
-    public void setAppid(String appid) {
-        this.appid = appid;
-    }
-
-    private void initApi() {
         api = WXAPIFactory.createWXAPI(context,appid);
     }
+
+
 
 
     public void initWx(String title, String content, final String imageUrl, String shareUrl) {
