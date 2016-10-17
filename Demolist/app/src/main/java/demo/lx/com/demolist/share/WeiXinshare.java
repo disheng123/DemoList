@@ -51,11 +51,9 @@ public class WeiXinshare {
             WXTextObject textObj = new WXTextObject();
             textObj.text = "asdasdasd";
 
-            //   WXTextObject     ʼ  һ  WXMediaMessage
             WXMediaMessage msg = new WXMediaMessage();
             msg.mediaObject = textObj;
-            //      ı    ͵   Ϣʱ  title ֶβ
-            // msg.title = "Will be ignored";
+
             msg.description = "asdasdasdsadasdwq321321321321";
             SendMessageToWX.Req req = new SendMessageToWX.Req();
             req.transaction = String.valueOf(System.currentTimeMillis());
