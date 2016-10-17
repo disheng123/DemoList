@@ -21,11 +21,11 @@ public class BasicApplication extends Application {
 	}
 
 	public void initImageLoader() {
-		File pFile = StorageUtils.getOwnCacheDirectory(this, ".Demolist/pic_dir/");
+//		File pFile = StorageUtils.getOwnCacheDirectory(this, ".Demolist/pic_dir/");
 		ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(this);
 		config.threadPriority(Thread.NORM_PRIORITY - 2);
 		config.threadPoolSize(15);
-		config.diskCache(new UnlimitedDiskCache(pFile));	// 自定义缓存路径
+//		config.diskCache(new UnlimitedDiskCache(pFile));	// 自定义缓存路径
 		config.diskCacheFileCount(5000);
 		config.denyCacheImageMultipleSizesInMemory();
 		config.diskCacheSize(100 * 1024 * 1024); // 100 MiB
