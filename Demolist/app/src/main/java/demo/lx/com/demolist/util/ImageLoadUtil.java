@@ -20,7 +20,6 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
-import cn.parteam.pd.util.Util;
 
 /**
  * Created by luffy on 15/4/2.
