@@ -64,7 +64,7 @@ public class ShareUtil {
                 }
                 type = 1;
                 WeiXinshare weiXinshare = new WeiXinshare(context,type,WXAPPID);
-                weiXinshare.initWx("标题","内容","http://lcd.yesky.com/imagelist/2009/315/qwm3qsg1r0l9.jpg","www.parteam.cn");
+                weiXinshare.initWx("标题","内容","http://e.hiphotos.baidu.com/image/pic/item/83025aafa40f4bfb27bfbf2b014f78f0f7361865.jpg","www.parteam.cn");
             }
         });
         //朋友圈
@@ -75,7 +75,7 @@ public class ShareUtil {
                 }
                 type = 2;
                 WeiXinshare weiXinshare = new WeiXinshare(context,type,WXAPPID);
-                weiXinshare.initWx("标题pengyouquan","内容","http://lcd.yesky.com/imagelist/2009/315/qwm3qsg1r0l9.jpg","www.parteam.cn");
+                weiXinshare.initWx("标题pengyouquan","内容","http://e.hiphotos.baidu.com/image/pic/item/83025aafa40f4bfb27bfbf2b014f78f0f7361865.jpg","www.baidu.com");
             }
         });
         //微博
