@@ -3,12 +3,15 @@ package demo.lx.com.demolist.share;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
@@ -26,21 +29,20 @@ import demo.lx.com.demolist.Utils;
  * qq：415473855
  */
 public class WeiXinshare {
-    private static final int THUMB_SIZE = 150;
+    private static final int THUMB_SIZE = 120;
     private IWXAPI api;
     private Context context;
     private int type;
+    private String appid;
 
     public WeiXinshare(Context context,int type,String appid){
         this.context = context;
         this.type = type;
-        api = WXAPIFactory.createWXAPI(context,appid);
+        this.appid = appid;
     }
 
-
-
-
-    public void initWx(String title, String content, String imageUrl, String shareUrl) {
+    public void initWx(final String title, final String content,Bitmap imageUrl, final String shareUrl) {
+        api = WXAPIFactory.createWXAPI(context,appid);
         if (!api.isWXAppInstalled()) {
             Toast.makeText(context, "您还未安装微信客户端", Toast.LENGTH_SHORT).show();
         } else {
@@ -52,13 +54,8 @@ public class WeiXinshare {
             msg.description = content;
             msg.mediaObject = web;
 
-            if(imageUrl != null || imageUrl.isEmpty()){
-                Bitmap bitmap =Bitmap.createScaledBitmap(Utils.GetLocalOrNetBitmap(imageUrl),THUMB_SIZE,THUMB_SIZE,true);//压缩Bitmap
-                msg.thumbData = Utils.bmpToByteArray(bitmap, true);
-            } else{
-                Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.mipmap.moren1);
-                msg.thumbData = Utils.bmpToByteArray(thumb, true);
-            }
+            Bitmap thumbBmp = Bitmap.createScaledBitmap(imageUrl, THUMB_SIZE, THUMB_SIZE, true);
+            msg.thumbData = Utils.bmpToByteArray(thumbBmp, true);
 
             SendMessageToWX.Req req = new SendMessageToWX.Req();
             req.transaction = String.valueOf(System.currentTimeMillis());
@@ -72,6 +69,14 @@ public class WeiXinshare {
                 req.scene = SendMessageToWX.Req.WXSceneTimeline;
             }
             api.sendReq(req);
+
+//            if(imageUrl != null || imageUrl.isEmpty()){
+//                Bitmap bitmap =Bitmap.createScaledBitmap(Utils.GetLocalOrNetBitmap(imageUrl),THUMB_SIZE,THUMB_SIZE,true);//压缩Bitmap
+//                msg.thumbData = Utils.bmpToByteArray(bitmap, true);
+//            }else{
+//                Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.mipmap.moren1);
+//                msg.thumbData = Utils.bmpToByteArray(thumb, true);
+//            }
         }
     }
 }

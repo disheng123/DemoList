@@ -43,6 +43,4 @@ public class ShareMainActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

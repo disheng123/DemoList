@@ -3,6 +3,7 @@ package demo.lx.com.demolist.share;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,12 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
 import demo.lx.com.demolist.R;
+import demo.lx.com.demolist.Utils;
 
 /**
  * 作者：李翔 on 2016/10/12 17:15
@@ -62,9 +68,32 @@ public class ShareUtil {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
-                type = 1;
-                WeiXinshare weiXinshare = new WeiXinshare(context,type,WXAPPID);
-                weiXinshare.initWx("标题","内容","http://lcd.yesky.com/imagelist/2009/315/qwm3qsg1r0l9.jpg","www.parteam.cn");
+
+                String imageUrl = "http://img.parteam.cn//default/activity/badminton/badminton4.jpg";
+
+                ImageLoader.getInstance().loadImage(imageUrl, new ImageLoadingListener() {
+                    @Override
+                    public void onLoadingStarted(String s, View view) {
+
+                    }
+
+                    @Override
+                    public void onLoadingFailed(String s, View view, FailReason failReason) {
+
+                    }
+
+                    @Override
+                    public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+                        type = 1;
+                        WeiXinshare weiXinshare = new WeiXinshare(context,type,WXAPPID);
+                        Bitmap sharBitmap = Utils.compressImage(bitmap);
+                        weiXinshare.initWx("标题","内容",sharBitmap,"www.baidu.com");
+                    }
+                    @Override
+                    public void onLoadingCancelled(String s, View view) {
+
+                    }
+                });
             }
         });
         //朋友圈
@@ -73,9 +102,9 @@ public class ShareUtil {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
-                type = 2;
-                WeiXinshare weiXinshare = new WeiXinshare(context,type,WXAPPID);
-                weiXinshare.initWx("标题pengyouquan","内容","http://lcd.yesky.com/imagelist/2009/315/qwm3qsg1r0l9.jpg","www.parteam.cn");
+//                type = 2;
+//                WeiXinshare weiXinshare = new WeiXinshare(context,type,WXAPPID);
+//                weiXinshare.initWx("标题pengyouquan","内容","http://img.parteam.cn//default/activity/badminton/badminton4.jpg","www.parteam.cn");
             }
         });
         //微博
