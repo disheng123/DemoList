@@ -39,10 +39,8 @@ public class ShareMainActivity extends AppCompatActivity {
         btn_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShareUtil.ToastDialog();
+                ShareUtil.ToastDialog("","","21321","",R.mipmap.shar_qq);
             }
         });
     }
-
-
 }
