@@ -28,6 +28,7 @@ public class ShareUtil {
     private int type;   //1：微信聊天，2：微信朋友圈
     private Context context;
     private final String WXAPPID = "wx9a61015dadc233b5";
+    private final String WEIBOAPPID = "";
     private int res;
     public ShareUtil(Context context){
         this.context = context;
@@ -157,6 +158,38 @@ public class ShareUtil {
             public void onClick(View v) {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
+                }
+                if(imageUrl != null && !imageUrl.isEmpty()){
+                    String imageUrls = "http://img.parteam.cn//default/activity/badminton/badminton4.jpg";
+                    ImageLoader.getInstance().loadImage(imageUrls, new ImageLoadingListener() {
+                        @Override
+                        public void onLoadingStarted(String s, View view) {
+                        }
+
+                        @Override
+                        public void onLoadingFailed(String s, View view, FailReason failReason) {
+                            WeiBoShar weiBoShar = new WeiBoShar(context,WEIBOAPPID);
+                            Bitmap bmp = BitmapFactory.decodeResource(context.getResources(),res);
+                            Bitmap sharBitmap = Utils.compressImage(bmp);
+                            weiBoShar.initWeiBo("标题pengyouquan","内容",sharBitmap,"www.baidu.com");
+                        }
+
+                        @Override
+                        public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+                            WeiBoShar weiBoShar = new WeiBoShar(context,WEIBOAPPID);
+                            Bitmap sharBitmap = Utils.compressImage(bitmap);
+                            weiBoShar.initWeiBo("标题pengyouquan","内容",sharBitmap,"www.baidu.com");
+                        }
+                        @Override
+                        public void onLoadingCancelled(String s, View view) {
+
+                        }
+                    });
+                }else{
+                    WeiBoShar weiBoShar = new WeiBoShar(context,WXAPPID);
+                    Bitmap bmp = BitmapFactory.decodeResource(context.getResources(),res);
+                    Bitmap sharBitmap = Utils.compressImage(bmp);
+                    weiBoShar.initWeiBo("标题pengyouquan","内容",sharBitmap,"www.baidu.com");
                 }
             }
         });
