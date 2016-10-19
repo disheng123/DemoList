@@ -39,4 +39,6 @@ dependencies {
     compile 'com.android.support:design:23.1.0'
     compile files('libs/libammsdk.jar')
     compile files('libs/universal-image-loader-1.9.5.jar')
+    compile files('libs/open_sdk_r5756_lite.jar')
+    compile files('libs/mta-sdk-1.6.2.jar')
 }

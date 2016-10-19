@@ -5,16 +5,25 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.tencent.connect.share.QQShare;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
+
+
+import org.json.JSONObject;
 
 import demo.lx.com.demolist.R;
 import demo.lx.com.demolist.Utils;
@@ -25,6 +34,34 @@ import demo.lx.com.demolist.Utils;
  * 分享
  */
 public class ShareUtil {
+
+    class BaseUiListener implements IUiListener {
+        protected void doComplete(JSONObject response) {
+
+        }
+
+        @Override
+        public void onComplete(Object response) {
+            // mBaseMessageText.setText("onComplete:");
+            // mMessageText.setText(response.toString());
+//            doComplete(response);
+            Toast.makeText(context,response.toString(),Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError(UiError uiError) {
+//            showResult("onError:", "code:" + e.errorCode + ", msg:"
+//                    + e.errorMessage + ", detail:" + e.errorDetail);
+            Toast.makeText(context,uiError.toString(),Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel() {
+//            showResult("onCancel", "");
+            Toast.makeText(context,"quxiao",Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private int type;   //1：微信聊天，2：微信朋友圈
     private Context context;
     private final String WXAPPID = "wx9a61015dadc233b5";
@@ -166,6 +203,15 @@ public class ShareUtil {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
+                Tencent mTencent = Tencent.createInstance("", context.getApplicationContext());
+                final Bundle params = new Bundle();
+                params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+                params.putString(QQShare.SHARE_TO_QQ_TITLE, "要分享的标题");
+                params.putString(QQShare.SHARE_TO_QQ_SUMMARY,  "要分享的摘要");
+                params.putString(QQShare.SHARE_TO_QQ_TARGET_URL,  "http://www.qq.com/news/1.html");
+                params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"http://imgcache.qq.com/qzone/space_item/pre/0/66768.gif");
+                params.putString(QQShare.SHARE_TO_QQ_APP_NAME,  "Demolist");
+                mTencent.shareToQQ((Activity) context, params, new BaseUiListener());
             }
         });
     }
